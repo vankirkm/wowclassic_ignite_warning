@@ -36,7 +36,10 @@ local UnitIsPlayer			= _G.UnitIsPlayer
 local UnitName				= _G.UnitName
 local UnitReaction			= _G.UnitReaction
 local UnitIsUnit 			= _G.UnitIsUnit
+local FindAuraByName		= AuraUtil.FindAuraByName
 
+local screenWidth			= floor(GetScreenWidth())
+local screenHeight			= floor(GetScreenHeight())
 
 
 
@@ -58,4 +61,42 @@ function OnChatEvent(self, event, ... )
 
 end
 
+local function CreateBackdrop(parent, cfg)
+	local f = CreateFrame("Frame", nil, parent)
+	f:SetPoint("TOPLEFT", parent, "TOPLEFT", -cfg.inset, cfg.inset)
+	f:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", cfg.inset, -cfg.inset)
+	-- Backdrop Settings
+	local backdrop = {
+		bgFile = LSM:Fetch("statusbar", cfg.bgTexture),
+		edgeFile = LSM:Fetch("statusbar", cfg.edgeTexture),
+		tile = cfg.tile,
+		tileSize = cfg.tileSize,
+		edgeSize = cfg.edgeSize,
+		insets = {
+			left = cfg.inset,
+			right = cfg.inset,
+			top = cfg.inset,
+			bottom = cfg.inset,
+		},
+	}
+	f:SetBackdrop(backdrop)
+	f:SetBackdropColor(unpack(cfg.bgColor))
+	f:SetBackdropBorderColor(unpack(cfg.edgeColor))
+
+	parent.backdrop = f
+end
+
+
+
 wowclassic_ignite_warning:getMages()
+wowclassic_ignite_warning:CreateBackdrop()
+
+SLASH_IW_SLASHCMD1 = "/iw"
+SLASH_IW_SLASHCMD2 = "/ignitewarning"
+SlashCmdList["IW_SLASHCMD"] = function(arg)
+	arg = arg:lower()
+
+	if arg == "toggle" then
+		print("Wow Classic Ignite Warning has been toggled on")
+	end
+end

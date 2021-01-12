@@ -4,4 +4,5 @@
 ## Author: Gurbz
 ## Version: 1.0
 
+embeds.xml
 wowclassic_ignite_warning.lua

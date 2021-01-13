@@ -46,6 +46,8 @@ SlashCmdList["IW_SLASHCMD"] = function(arg)
 	arg = arg:lower()
 
 	if arg == "toggle" then
-		print("Wow Classic Ignite Warning has been toggled on")
+		print("Classic Ignite Warning has been toggled on")
+	else
+		print("To toggle Classic Ignite Warning on or off, type /iw toggle")
 	end
 end

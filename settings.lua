@@ -7,7 +7,7 @@ local options = {
 options.args["minimapButton"] = {
 	order = 0,
 	type = "toggle",
-	name = "Hide Minimap Button",
+	name = "Hide Minimap Butto",
 	desc = "This does nothing. It's simpy a test to see if this works in-game.",
 }
 

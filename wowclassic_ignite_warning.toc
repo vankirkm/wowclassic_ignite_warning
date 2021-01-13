@@ -1,8 +1,10 @@
 ## Interface: 11306
-## Title: WoW Classic Ignite Warning
-## Notes: An addon to display a visual and audio warning for all mages in a raid group when one mages is close to pulling threat with ignite.
+## Title: ClassicIgniteWarning
+## Notes: An addon to display a visual and audio warning for all mages in a raid group when one mage is close to pulling threat with ignite.
 ## Author: Gurbz
-## Version: 1.0
+## Version: 0.1
 
+Locales\Locales.xml
 embeds.xml
-wowclassic_ignite_warning.lua
+ClassicIgniteWarning.lua
+settings.lua

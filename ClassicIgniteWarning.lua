@@ -1,4 +1,4 @@
-ClassicIgniteWarning = LibStub("AceAddon-3.0"):NewAddon("ClassicIgniteWarning", "AceConsole-3.0", "AceComm-3.0")
+ClassicIgniteWarning = LibStub("AceAddon-3.0"):NewAddon("ClassicIgniteWarning", "AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
 
 
 -------------------------------------

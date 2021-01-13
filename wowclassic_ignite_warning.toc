@@ -4,7 +4,6 @@
 ## Author: Gurbz
 ## Version: 0.1
 
-Locales\Locales.xml
 embeds.xml
 ClassicIgniteWarning.lua
 settings.lua

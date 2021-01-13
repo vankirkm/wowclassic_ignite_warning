@@ -53,8 +53,7 @@ SlashCmdList["IW_SLASHCMD"] = function(arg)
 	arg = arg:lower()
 
 	if arg == "toggle" then
-		print("Classic Ignite Warning has been toggled on")
-		ClassicIgniteWarningGUI:Show()
+		ClassicIgniteWarningGUI:ToggleGUI()
 	else
 		print("To toggle Classic Ignite Warning on or off, type /iw toggle")
 	end

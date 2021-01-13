@@ -25,6 +25,10 @@ function ClassicIgniteWarning:OnDisable()
 end
 
 
+ClassicIgniteWarning:RegisterEvent("NAME_OF_EVENT", "MyHandlerMethod")
+function ClassicIgniteWarning:MyHandlerMethod()
+    -- now handle it!
+end
 
 
 function ClassicIgniteWarning:getMages()

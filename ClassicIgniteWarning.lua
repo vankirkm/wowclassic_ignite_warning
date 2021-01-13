@@ -25,9 +25,10 @@ function ClassicIgniteWarning:OnDisable()
 end
 
 
-ClassicIgniteWarning:RegisterEvent("NAME_OF_EVENT", "MyHandlerMethod")
-function ClassicIgniteWarning:MyHandlerMethod()
-    -- now handle it!
+
+function ClassicIgniteWarning:UNIT_THREAT_LIST_UPDATE(event, unitTarget)
+	-- now handle it!
+	print("there was a threat update")
 end
 
 
@@ -44,6 +45,8 @@ function OnChatEvent(self, event, ... )
 
 end
 
+ClassicIgniteWarning:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
+
 SLASH_IW_SLASHCMD1 = "/iw"
 SLASH_IW_SLASHCMD2 = "/ignitewarning"
 SlashCmdList["IW_SLASHCMD"] = function(arg)
@@ -51,6 +54,7 @@ SlashCmdList["IW_SLASHCMD"] = function(arg)
 
 	if arg == "toggle" then
 		print("Classic Ignite Warning has been toggled on")
+		ClassicIgniteWarningGUI:Show()
 	else
 		print("To toggle Classic Ignite Warning on or off, type /iw toggle")
 	end

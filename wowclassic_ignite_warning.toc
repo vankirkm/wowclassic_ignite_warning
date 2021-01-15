@@ -5,6 +5,7 @@
 ## Version: 0.1
 
 settings.lua
+config.lua
 GUI.lua
 embeds.xml
 ClassicIgniteWarning.lua

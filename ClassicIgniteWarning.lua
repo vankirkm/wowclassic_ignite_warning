@@ -1,5 +1,7 @@
+local ClassicIgniteWarning = {}
 ClassicIgniteWarning = LibStub("AceAddon-3.0"):NewAddon("ClassicIgniteWarning", "AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
-
+_G["ClassicIgniteWarning"] = CIW
+defaultConfig = {}
 
 -------------------------------------
 --            VARIABLES            --
@@ -11,9 +13,28 @@ ClassicIgniteWarning = LibStub("AceAddon-3.0"):NewAddon("ClassicIgniteWarning", 
 --            FUNCTIONS            --
 -------------------------------------
 
+function ClassicIgniteWarning:MakeFrame()
+    local f = CreateFrame("Frame", nil, UIParent)
+    f:SetMovable(true)
+    f:EnableMouse(true)
+    f:RegisterForDrag("LeftButton")
+    f:SetScript("OnDragStart", f.StartMoving)
+    f:SetScript("OnDragStop", f.StopMovingOrSizing)
+    f:SetPoint("CENTER", UIParent, "CENTER")
+    f:SetBackdrop({
+        bgFile = defaultTexture, tile = true, tileSize = 20,
+        edgeFile = defaultTexture, edgeSize = 32,
+        insets = { left = 10, right = 10, top = 10, bottom = 10 }
+    })
+    f:SetBackdropColor(0.8,0.8,0.8,1)
+	f:SetBackdropBorderColor(0.8,0.8,0.8,1)
+	f:Show()
+end
+
 function ClassicIgniteWarning:OnInitialize()
 	-- Code that you want to run when the addon is first loaded goes here.
 	print("getting mages in group...")
+	ClassicIgniteWarning:MakeFrame()
 end
 
 function ClassicIgniteWarning:OnEnable()
@@ -46,6 +67,7 @@ function OnChatEvent(self, event, ... )
 end
 
 ClassicIgniteWarning:RegisterEvent("UNIT_THREAT_LIST_UPDATE")
+
 
 SLASH_IW_SLASHCMD1 = "/iw"
 SLASH_IW_SLASHCMD2 = "/ignitewarning"

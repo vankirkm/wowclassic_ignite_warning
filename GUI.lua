@@ -40,7 +40,6 @@ btn:SetCallback("OnClick", function() print("Click!") end)
 
 function GUI:ToggleGUI()
     if not isShown then
-        frame = getglobal("MainFrame")
         frame:Show()
         isShown = true
     else

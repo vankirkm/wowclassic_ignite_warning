@@ -26,18 +26,34 @@ local backdrop = {
     bottom = defaultConfig.backdrop.inset,}
 }
 
+
+
+-----------------------------------
+--         FRAME FUNCTIONS       -- 
+-----------------------------------
+
 --create frame
 function GUI:MakeFrame()
-    frame = getglobal("MainFrame")
-    frame.resize = CreateFrame("Frame", "Resize", self.frame)
-	frame.resize:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, 0)
-	frame.resize:SetSize(12, 12)
-	frame.resizeTexture = frame.resize:CreateTexture()
-	frame.resizeTexture:SetTexture([[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up]])
-	frame.resizeTexture:SetDesaturated(true)
-	frame.resizeTexture:SetPoint("TOPLEFT", frame.resize)
-    frame.resizeTexture:SetPoint("BOTTOMRIGHT", frame.resize, "BOTTOMRIGHT", 0, 0)
-    frame:Show()
+    f = getglobal("MainFrame")
+    f:SetResizable("true")
+    f.resize = CreateFrame("Frame", "Resize", self.f)
+	f.resize:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
+	f.resize:SetSize(12, 12)
+	f.resizeTexture = f.resize:CreateTexture()
+	f.resizeTexture:SetTexture([[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up]])
+	f.resizeTexture:SetDesaturated(true)
+	f.resizeTexture:SetPoint("TOPLEFT", f.resize)
+    f.resizeTexture:SetPoint("BOTTOMRIGHT", f.resize, "BOTTOMRIGHT", 0, 0)
+    f.resize:SetScript("OnMouseDown", function(f, button)
+        if button == "LeftButton" then
+            f:SetMovable("false")
+            print("doodoo")
+            f.isSizing = true
+            f:StartSizing("BOTTOMRIGHT")
+            f:SetUserPlaced(true)
+        end
+    end)
+    f:Show()
 end
 
 function GUI:ToggleGUI()

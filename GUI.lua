@@ -29,14 +29,16 @@ local backdrop = {
 --create frame
 function GUI:MakeFrame()
     frame = getglobal("MainFrame")
+    frame.resize = CreateFrame("Frame", "Resize", self.frame)
+	frame.resize:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 0, 0)
+	frame.resize:SetSize(12, 12)
+	frame.resizeTexture = frame.resize:CreateTexture()
+	frame.resizeTexture:SetTexture([[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up]])
+	frame.resizeTexture:SetDesaturated(true)
+	frame.resizeTexture:SetPoint("TOPLEFT", frame.resize)
+    frame.resizeTexture:SetPoint("BOTTOMRIGHT", frame.resize, "BOTTOMRIGHT", 0, 0)
     frame:Show()
 end
--- Create a button
-local btn = AceGUI:Create("Button")
-btn:SetWidth(170)
-btn:SetText("Button !")
-btn:SetCallback("OnClick", function() print("Click!") end)
--- Add the button to the container
 
 function GUI:ToggleGUI()
     if not isShown then

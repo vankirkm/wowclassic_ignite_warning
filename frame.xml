@@ -3,9 +3,9 @@
 <Script file="GUI.lua"/>
 
 <!-- new Template with frameStrata="DIALOG"   the Backdrop Border definitions work only correctly with the Dialog type of Frame -->
-   <Frame name="FramesDialog" hidden="true" toplevel="true" virtual="true" frameStrata="DIALOG" parent="UIParent">
+<Frame name="FramesDialog" hidden="true" toplevel="true" virtual="true" frameStrata="DIALOG" parent="UIParent" resizable="true">
 	<Size> 
-      <AbsDimension x="200" y="200"/> 
+        <AbsDimension x="200" y="200"/> 
     </Size> 
 	<Anchors>
 		<Anchor point="CENTER"/>
@@ -18,12 +18,10 @@
 			<AbsValue val="1"/>
 		</EdgeSize>
 	</Backdrop>
-  </Frame>
+</Frame>
 
 
 <Frame name="MainFrame" inherits="FramesDialog" movable="true" enableMouse="true">
-<Frame>
-</Frame>
     <Layers> 
         <Layer level="ARTWORK"> 
             <FontString name="$parent_Text" inherits="GameFontNormal" text="click to move this frame 1, ">
@@ -35,6 +33,8 @@
 		<OnMouseUp>  self:StopMovingOrSizing() </OnMouseUp>
 		<OnDragStop> self:StopMovingOrSizing() </OnDragStop>
 	</Scripts> 
+
+
 </Frame>
 </Ui>
 

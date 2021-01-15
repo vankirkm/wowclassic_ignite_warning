@@ -28,21 +28,8 @@ local backdrop = {
 
 --create frame
 function GUI:MakeFrame()
-    local f = CreateFrame("Frame", nil, UIParent)
-    f:SetMovable(true)
-    f:EnableMouse(true)
-    f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", f.StartMoving)
-    f:SetScript("OnDragStop", f.StopMovingOrSizing)
-    f:SetPoint("CENTER", UIParent, "CENTER")
-    f:SetBackdrop({
-        bgFile = defaultTexture, tile = true, tileSize = 20,
-        edgeFile = defaultTexture, edgeSize = 32,
-        insets = { left = 10, right = 10, top = 10, bottom = 10 }
-    })
-    f:SetBackdropColor(0.8,0.8,0.8,1)
-    f:SetBackdropBorderColor(0.8,0.8,0.8,1)
-    f:Show()
+    frame = getglobal("MainFrame")
+    frame:Show()
 end
 -- Create a button
 local btn = AceGUI:Create("Button")
@@ -53,11 +40,11 @@ btn:SetCallback("OnClick", function() print("Click!") end)
 
 function GUI:ToggleGUI()
     if not isShown then
-        f:Show()
-        print("Classic Ignite Warning GUI has been toggled on")
+        frame = getglobal("MainFrame")
+        frame:Show()
         isShown = true
     else
-        f:Hide()
+        frame:Hide()
         print("Classic Ignite Warning GUI has been toggled off")
         isShown = false
     end

@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+
+<Script file="GUI.lua"/>
+
+<!-- new Template with frameStrata="DIALOG"   the Backdrop Border definitions work only correctly with the Dialog type of Frame -->
+   <Frame name="FramesDialog" hidden="true" toplevel="true" virtual="true" frameStrata="DIALOG" parent="UIParent">
+	<Size> 
+      <AbsDimension x="200" y="200"/> 
+    </Size> 
+	<Anchors>
+		<Anchor point="CENTER"/>
+	</Anchors>
+	<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+		<TileSize>
+			<AbsValue val="32"/>
+		</TileSize>
+		<EdgeSize>
+			<AbsValue val="32"/>
+		</EdgeSize>
+		<BackgroundInsets>
+			<AbsInset left="11" right="12" top="12" bottom="11"/>
+		</BackgroundInsets>
+	</Backdrop>
+  </Frame>
+
+
+<Frame name="MainFrame" inherits="FramesDialog" movable="true" enableMouse="true">
+<Frame>
+</Frame>
+    <Layers> 
+        <Layer level="ARTWORK"> 
+            <FontString name="$parent_Text" inherits="GameFontNormal" text="click to move this frame 1, ">
+		    </FontString>
+        </Layer> 
+    </Layers> 	
+	<Scripts>
+	    <OnMouseDown> this:StartMoving();  </OnMouseDown>
+		<OnMouseUp>  this:StopMovingOrSizing(); </OnMouseUp>
+		<OnDragStop> this:StopMovingOrSizing(); </OnDragStop>
+	</Scripts> 
+</Frame>
+</Ui>
+
+

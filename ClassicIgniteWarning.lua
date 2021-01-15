@@ -1,6 +1,7 @@
 local ClassicIgniteWarning = {}
 ClassicIgniteWarning = LibStub("AceAddon-3.0"):NewAddon("ClassicIgniteWarning", "AceConsole-3.0", "AceComm-3.0", "AceEvent-3.0")
 _G["ClassicIgniteWarning"] = CIW
+local GUI = _G.ClassicIgniteWarningGUI
 defaultConfig = {}
 
 -------------------------------------
@@ -13,28 +14,11 @@ defaultConfig = {}
 --            FUNCTIONS            --
 -------------------------------------
 
-function ClassicIgniteWarning:MakeFrame()
-    local f = CreateFrame("Frame", nil, UIParent)
-    f:SetMovable(true)
-    f:EnableMouse(true)
-    f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", f.StartMoving)
-    f:SetScript("OnDragStop", f.StopMovingOrSizing)
-    f:SetPoint("CENTER", UIParent, "CENTER")
-    f:SetBackdrop({
-        bgFile = defaultTexture, tile = true, tileSize = 20,
-        edgeFile = defaultTexture, edgeSize = 32,
-        insets = { left = 10, right = 10, top = 10, bottom = 10 }
-    })
-    f:SetBackdropColor(0.8,0.8,0.8,1)
-	f:SetBackdropBorderColor(0.8,0.8,0.8,1)
-	f:Show()
-end
-
 function ClassicIgniteWarning:OnInitialize()
 	-- Code that you want to run when the addon is first loaded goes here.
-	print("getting mages in group...")
-	ClassicIgniteWarning:MakeFrame()
+    print("getting mages in group...")
+    GUI:MakeFrame()
+	
 end
 
 function ClassicIgniteWarning:OnEnable()
@@ -75,7 +59,7 @@ SlashCmdList["IW_SLASHCMD"] = function(arg)
 	arg = arg:lower()
 
 	if arg == "toggle" then
-		ClassicIgniteWarningGUI:ToggleGUI()
+		GUI:ToggleGUI()
 	else
 		print("To toggle Classic Ignite Warning on or off, type /iw toggle")
 	end

@@ -7,5 +7,6 @@
 settings.lua
 config.lua
 GUI.lua
+frame.xml
 embeds.xml
 ClassicIgniteWarning.lua

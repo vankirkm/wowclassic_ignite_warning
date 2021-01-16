@@ -21,7 +21,7 @@
 </Frame>
 
 
-<Frame name="MainFrame" inherits="FramesDialog" movable="true" enableMouse="true">
+<Frame name="MainPanel" inherits="FramesDialog" movable="true" enableMouse="true">
     <Layers> 
         <Layer level="ARTWORK"> 
             <FontString name="$parent_Text" inherits="GameFontNormal" text="click to move this frame 1, ">

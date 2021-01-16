@@ -33,7 +33,7 @@ end
 
 function ClassicIgniteWarning:UNIT_THREAT_LIST_UPDATE(event, unitTarget)
 	-- now handle it!
-	print("there was a threat update")
+	--print("there was a threat update")
 end
 
 

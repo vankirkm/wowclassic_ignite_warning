@@ -34,8 +34,10 @@ local backdrop = {
 
 --create frame
 function GUI:MakeFrame()
-    f = getglobal("MainFrame")
+    f = getglobal("MainPanel")
     f:SetResizable("true")
+
+    -----resize button settings-----
     f.resize = CreateFrame("Frame", "Resize", f)
 	f.resize:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
 	f.resize:SetSize(12, 12)
@@ -48,19 +50,29 @@ function GUI:MakeFrame()
         f:StartSizing("BOTTOMRIGHT")
         f:SetUserPlaced(true)
     end)
-     
+
     f.resize:SetScript("OnMouseUp", function(self, button)
         f:StopMovingOrSizing()
     end)
+
+    -----header settings-----
+    f.header = CreateFrame("StatusBar", nil, f)
+    f.headerTexture = f.header:CreateTexture()
+    f.header:SetMinMaxValues(100, 100)
+    f.header:SetSize(0 , 100)
+    f.headerTexture:SetTexture([[Interface\ChatFrame\ChatFrameBackground]])
+    f.header:SetPoint("TOPLEFT", f, 0, 0)
+    f.headerTexture:SetPoint("TOPLEFT", f.header)
+	f.header:SetStatusBarColor(0, 0, 0, 0.8)
     f:Show()
 end
 
 function GUI:ToggleGUI()
     if not isShown then
-        frame:Show()
+        f:Show()
         isShown = true
     else
-        frame:Hide()
+        f:Hide()
         print("Classic Ignite Warning GUI has been toggled off")
         isShown = false
     end

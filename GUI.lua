@@ -36,7 +36,7 @@ local backdrop = {
 function GUI:MakeFrame()
     f = getglobal("MainFrame")
     f:SetResizable("true")
-    f.resize = CreateFrame("Frame", "Resize", UIParent)
+    f.resize = CreateFrame("Frame", "Resize", f)
 	f.resize:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
 	f.resize:SetSize(12, 12)
 	f.resizeTexture = f.resize:CreateTexture()
@@ -44,15 +44,13 @@ function GUI:MakeFrame()
 	f.resizeTexture:SetDesaturated(true)
 	f.resizeTexture:SetPoint("TOPLEFT", f.resize)
     f.resizeTexture:SetPoint("BOTTOMRIGHT", f.resize, "BOTTOMRIGHT", 0, 0)
-    f.resize:SetFrameLevel(0)
-    f.resize:SetScript("OnMouseDown", function(f, button)
-        if button == "LeftButton" then
-            f:SetMovable("false")
-            print("doodoo")
-            f.isSizing = true
-            f:StartSizing("BOTTOMRIGHT")
-            f:SetUserPlaced(true)
-        end
+    f.resize:SetScript("OnMouseDown", function(self, button)
+        f:StartSizing("BOTTOMRIGHT")
+        f:SetUserPlaced(true)
+    end)
+     
+    f.resize:SetScript("OnMouseUp", function(self, button)
+        f:StopMovingOrSizing()
     end)
     f:Show()
 end

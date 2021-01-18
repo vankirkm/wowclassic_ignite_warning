@@ -36,10 +36,10 @@ local backdrop = {
 --create frame
 function GUI:MakeFrame()
     f = CreateFrame("Frame", "CIWMain", UIParent)
-    f:SetPoint("TOPLEFT", parent, "TOPLEFT", 0, 0)
-    f:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
+    f:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -100, 300)
     f:SetBackdrop(backdrop)
-	f:SetBackdropColor(1, 1, 1, 0.1)
+    f:SetSize(200,161)
+	f:SetBackdropColor(1, 1, 1, 0.08)
 	f:SetBackdropBorderColor(0, 0, 0, 1)
     f:SetResizable("true")
 
@@ -62,16 +62,18 @@ function GUI:MakeFrame()
     end)
 
     -----header settings-----
-    f.header = CreateFrame("StatusBar", nil, f)
-    f.headerTexture = f.header:CreateTexture()
-    f.header:SetMinMaxValues(100, 100)
-    f.header:SetSize(f:GetWidth() , 100)
-    f.headerTexture:SetTexture([[Interface\ChatFrame\ChatFrameBackground]])
-    f.header:SetPoint("TOPLEFT", f)
-    f.headerTexture:SetPoint("TOPLEFT", f.header)
-    f.headerTexture:SetSize(f:GetWidth() , 20)
-    f.header:SetStatusBarColor(0, 0, 0, 0.8)
-    f:Show()
+    header = CreateFrame("StatusBar", nil, f)
+	header:SetMinMaxValues(0, 100)
+	-- Backdrop
+    CreateBackdrop(header)
+    header:SetSize(f:GetWidth(), 20)
+    header:SetStatusBarTexture(defaultTexture)
+
+	header:SetPoint("TOPLEFT", f, 0, 0)
+	header:SetStatusBarColor(0, 0, 0, 0.8)
+
+	header.backdrop:SetBackdropColor(0, 0, 0, 0) -- ugly, but okay for now
+	header.backdrop:SetBackdropBorderColor(0, 0, 0, 0.8) -- adjust alpha for border
 end
 
 function GUI:ToggleGUI()
@@ -83,4 +85,16 @@ function GUI:ToggleGUI()
         print("Classic Ignite Warning GUI has been toggled off")
         isShown = false
     end
+end
+
+function CreateBackdrop(parent)
+	local frame = CreateFrame("Frame", nil, parent)
+	frame = CreateFrame("Frame", "CIWMain", parent)
+    frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -100, 300)
+    frame:SetBackdrop(backdrop)
+    frame:SetSize(200,161)
+	frame:SetBackdropColor(1, 1, 1, 0.08)
+	frame:SetBackdropBorderColor(0, 0, 0, 1)
+    frame:SetResizable("true")
+	parent.backdrop = frame
 end

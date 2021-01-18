@@ -4,10 +4,6 @@ _G["ClassicIgniteWarning"] = CIW
 local GUI = _G.ClassicIgniteWarningGUI
 defaultConfig = {}
 
-local LSM = LibStub("LibSharedMedia-3.0")
-LSM:Register("statusbar", "CIW Default", [[Interface\ChatFrame\ChatFrameBackground]])
-LSM:Register("font", "NotoSans SemiCondensedBold", [[Interface\AddOns\wowclassic_ignite_warning\Fonts\NotoSans-SemiCondensedBold.ttf]])
-
 -------------------------------------
 --            VARIABLES            --
 -------------------------------------

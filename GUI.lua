@@ -3,6 +3,10 @@ _G["ClassicIgniteWarningGUI"] = GUI
 local cfg = _G.defaultConfig
 print(cfg.backdrop)
 
+local LSM = LibStub("LibSharedMedia-3.0")
+LSM:Register("statusbar", "CIW Default", [[Interface\ChatFrame\ChatFrameBackground]])
+LSM:Register("font", "NotoSans SemiCondensedBold", [[Interface\AddOns\wowclassic_ignite_warning\Fonts\NotoSans-SemiCondensedBold.ttf]])
+LSM:Register("font", "Standard Text Font", _G.STANDARD_TEXT_FONT)
 
 
 -------------------------------------
@@ -11,7 +15,6 @@ print(cfg.backdrop)
 local isShown = true
 local defaultTexture = "CIW Default"
 local defaultFont = "NotoSans SemiCondensedBold"
-local AceGUI = LibStub("AceGUI-3.0")
 
 local playerName = UnitName("player")
 
@@ -81,11 +84,13 @@ function GUI:MakeFrame()
     f.header:SetScript("OnMouseUp", StopDrag)
 
     -----Header Text-----
-    f.header.text = f.header:CreateFontString(nil, "OVERLAY", defaultFont)
+    f.header.text = f.header:CreateFontString(nil, "OVERLAY")
+    f.header.text:SetFont(LSM:Fetch("font", "NotoSans SemiCondensedBold"), 12, "OUTLINE")
     f.header.text:SetText(format("%s%s", "Classic Ignite Warning", ""))
+    f.header.text:SetVertexColor(1, 1, 1, 1)
     f.header.text:SetPoint("LEFT", 4, 0)
-    f.header.text:Show()
-    
+
+    f.header:Show()
 end
 
 function StartDrag(pframe)

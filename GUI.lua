@@ -11,6 +11,7 @@ local isShown = true
 local AceGUI = LibStub("AceGUI-3.0")
 
 local playerName = UnitName("player")
+local defaultTexture = "CIW Default"
 
 --backdrop settings
 local backdrop = {
@@ -23,7 +24,7 @@ local backdrop = {
     left = defaultConfig.backdrop.inset,
     right = defaultConfig.backdrop.inset,
     top = defaultConfig.backdrop.inset,
-    bottom = defaultConfig.backdrop.inset,}
+    bottom = defaultConfig.backdrop.inset,},
 }
 
 
@@ -34,7 +35,12 @@ local backdrop = {
 
 --create frame
 function GUI:MakeFrame()
-    f = getglobal("MainPanel")
+    f = CreateFrame("Frame", "CIWMain", UIParent)
+    f:SetPoint("TOPLEFT", parent, "TOPLEFT", 0, 0)
+    f:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
+    f:SetBackdrop(backdrop)
+	f:SetBackdropColor(1, 1, 1, 0.1)
+	f:SetBackdropBorderColor(0, 0, 0, 1)
     f:SetResizable("true")
 
     -----resize button settings-----
@@ -63,6 +69,7 @@ function GUI:MakeFrame()
     f.headerTexture:SetTexture([[Interface\ChatFrame\ChatFrameBackground]])
     f.header:SetPoint("TOPLEFT", f)
     f.headerTexture:SetPoint("TOPLEFT", f.header)
+    f.headerTexture:SetSize(f:GetWidth() , 20)
     f.header:SetStatusBarColor(0, 0, 0, 0.8)
     f:Show()
 end

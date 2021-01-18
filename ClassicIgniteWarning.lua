@@ -4,6 +4,9 @@ _G["ClassicIgniteWarning"] = CIW
 local GUI = _G.ClassicIgniteWarningGUI
 defaultConfig = {}
 
+local LSM = LibStub("LibSharedMedia-3.0")
+LSM:Register("statusbar", "CIW Default", [[Interface\ChatFrame\ChatFrameBackground]])
+
 -------------------------------------
 --            VARIABLES            --
 -------------------------------------
@@ -18,7 +21,6 @@ function ClassicIgniteWarning:OnInitialize()
 	-- Code that you want to run when the addon is first loaded goes here.
     print("getting mages in group...")
     GUI:MakeFrame()
-	
 end
 
 function ClassicIgniteWarning:OnEnable()

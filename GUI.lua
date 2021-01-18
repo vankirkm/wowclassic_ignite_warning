@@ -36,15 +36,17 @@ local backdrop = {
 --create frame
 function GUI:MakeFrame()
     f = CreateFrame("Frame", "CIWMain", UIParent)
+    f:SetFrameStrata("MEDIUM")
     f:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -100, 300)
     f:SetBackdrop(backdrop)
     f:SetSize(200,161)
-	f:SetBackdropColor(1, 1, 1, 0.08)
+	f:SetBackdropColor(0, 0, 0, 0.4)
 	f:SetBackdropBorderColor(0, 0, 0, 1)
     f:SetResizable("true")
+    f:SetMovable("true")
 
     -----resize button settings-----
-    f.resize = CreateFrame("Frame", "Resize", f)
+    f.resize = CreateFrame("Frame", nil, f)
 	f.resize:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
 	f.resize:SetSize(12, 12)
 	f.resizeTexture = f.resize:CreateTexture()
@@ -62,18 +64,34 @@ function GUI:MakeFrame()
     end)
 
     -----header settings-----
-    header = CreateFrame("StatusBar", nil, f)
-	header:SetMinMaxValues(0, 100)
-	-- Backdrop
-    CreateBackdrop(header)
-    header:SetSize(f:GetWidth(), 20)
-    header:SetStatusBarTexture(defaultTexture)
+    f.header = CreateFrame("StatusBar", nil, f)
+    f.header:SetMinMaxValues(0, 100)
+    
+	-- Backdrop for header
+    CreateBackdrop(f.header)
+    f.header:SetSize(f:GetWidth(), 20)
+    f.header:SetMovable("true")
+    f.header:SetStatusBarTexture(defaultTexture)
 
-	header:SetPoint("TOPLEFT", f, 0, 0)
-	header:SetStatusBarColor(0, 0, 0, 0.8)
+	f.header:SetPoint("TOPLEFT", f, 0, 0)
+	f.header:SetStatusBarColor(0, 0, 0, 0.8)
 
-	header.backdrop:SetBackdropColor(0, 0, 0, 0) -- ugly, but okay for now
-	header.backdrop:SetBackdropBorderColor(0, 0, 0, 0.8) -- adjust alpha for border
+	f.header.backdrop:SetBackdropColor(0, 0, 0, 0) -- ugly, but okay for now
+    f.header.backdrop:SetBackdropBorderColor(0, 0, 0, 0.8) -- adjust alpha for border
+    f.header:SetScript("OnMouseDown", StartDrag)
+
+    f.header:SetScript("OnMouseUp", StopDrag)
+end
+
+function StartDrag(pframe)
+    pframe = pframe:GetParent()
+    print("pframe")
+    pframe:StartMoving()
+end
+
+function StopDrag(pframe)
+    pframe = pframe:GetParent()
+    pframe:StopMovingOrSizing()
 end
 
 function GUI:ToggleGUI()
@@ -89,10 +107,8 @@ end
 
 function CreateBackdrop(parent)
 	local frame = CreateFrame("Frame", nil, parent)
-	frame = CreateFrame("Frame", "CIWMain", parent)
-    frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", -100, 300)
+    frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
     frame:SetBackdrop(backdrop)
-    frame:SetSize(200,161)
 	frame:SetBackdropColor(1, 1, 1, 0.08)
 	frame:SetBackdropBorderColor(0, 0, 0, 1)
     frame:SetResizable("true")

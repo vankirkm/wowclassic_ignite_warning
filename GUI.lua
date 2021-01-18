@@ -59,6 +59,9 @@ function GUI:MakeFrame()
 	f.resizeTexture:SetPoint("TOPLEFT", f.resize)
     f.resizeTexture:SetPoint("BOTTOMRIGHT", f.resize, "BOTTOMRIGHT", 0, 0)
     f.resize:SetScript("OnMouseDown", function(self, button)
+        f:SetMinResize(64, 18)
+	    f:SetMaxResize(512, 1024)
+	    f:SetScript("OnSizeChanged", UpdateSize)
         f:StartSizing("BOTTOMRIGHT")
         f:SetUserPlaced(true)
     end)
@@ -73,8 +76,10 @@ function GUI:MakeFrame()
     
 	-- Backdrop for header
     CreateBackdrop(f.header)
-    f.header:SetSize(f:GetWidth(), 20)
+    f.header:SetSize(cfg.frame.width, 18)
     f.header:SetMovable("true")
+    f.header:SetResizable("true")
+    f.header:SetClampedToScreen(true)
     f.header:SetStatusBarTexture(defaultTexture)
 	f.header:SetPoint("TOPLEFT", f, 0, 0)
 	f.header:SetStatusBarColor(0, 0, 0, 0.8)
@@ -125,8 +130,7 @@ function CreateBackdrop(parent)
 	parent.backdrop = frame
 end
 
-function MakeFontString(parent)
-	local fs = parent:CreateFontString(nil, "ARTWORK")
-	fs:SetFont("Fonts\\NotoSans-SemiCondensedBold.ttf", 12, "OUTLINE")
-	return fs
+local function UpdateSize(f)
+	cfg.frame.width = f:GetWidth() - 2
+	cfg.frame.height = f:GetHeight()
 end

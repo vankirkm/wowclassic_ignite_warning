@@ -1,17 +1,19 @@
 local GUI = {}
 _G["ClassicIgniteWarningGUI"] = GUI
-
 local cfg = _G.defaultConfig
 print(cfg.backdrop)
+
+
+
 -------------------------------------
 --            VARIABLES            --
 -------------------------------------
 local isShown = true
-
+local defaultTexture = "CIW Default"
+local defaultFont = "NotoSans SemiCondensedBold"
 local AceGUI = LibStub("AceGUI-3.0")
 
 local playerName = UnitName("player")
-local defaultTexture = "CIW Default"
 
 --backdrop settings
 local backdrop = {
@@ -36,7 +38,6 @@ local backdrop = {
 --create frame
 function GUI:MakeFrame()
     f = CreateFrame("Frame", "CIWMain", UIParent)
-    f:SetFrameStrata("MEDIUM")
     f:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -100, 300)
     f:SetBackdrop(backdrop)
     f:SetSize(200,161)
@@ -72,15 +73,19 @@ function GUI:MakeFrame()
     f.header:SetSize(f:GetWidth(), 20)
     f.header:SetMovable("true")
     f.header:SetStatusBarTexture(defaultTexture)
-
 	f.header:SetPoint("TOPLEFT", f, 0, 0)
 	f.header:SetStatusBarColor(0, 0, 0, 0.8)
-
-	f.header.backdrop:SetBackdropColor(0, 0, 0, 0) -- ugly, but okay for now
-    f.header.backdrop:SetBackdropBorderColor(0, 0, 0, 0.8) -- adjust alpha for border
+	f.header.backdrop:SetBackdropColor(0, 0, 0, 0)
+    f.header.backdrop:SetBackdropBorderColor(0, 0, 0, 0.8)
     f.header:SetScript("OnMouseDown", StartDrag)
-
     f.header:SetScript("OnMouseUp", StopDrag)
+
+    -----Header Text-----
+    f.header.text = f.header:CreateFontString(nil, "OVERLAY", defaultFont)
+    f.header.text:SetText(format("%s%s", "Classic Ignite Warning", ""))
+    f.header.text:SetPoint("LEFT", 4, 0)
+    f.header.text:Show()
+    
 end
 
 function StartDrag(pframe)
@@ -113,4 +118,10 @@ function CreateBackdrop(parent)
 	frame:SetBackdropBorderColor(0, 0, 0, 1)
     frame:SetResizable("true")
 	parent.backdrop = frame
+end
+
+function MakeFontString(parent)
+	local fs = parent:CreateFontString(nil, "ARTWORK")
+	fs:SetFont("Fonts\\NotoSans-SemiCondensedBold.ttf", 12, "OUTLINE")
+	return fs
 end

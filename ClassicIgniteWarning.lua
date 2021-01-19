@@ -135,8 +135,6 @@ function ClassicIgniteWarning:MakeFrame()
     f.header.text:SetText(format("%s%s", "Classic Ignite Warning", ""))
     f.header.text:SetVertexColor(1, 1, 1, 1)
     f.header.text:SetPoint("LEFT", 4, 0)
-
-    f.header:Show()
 end
 
 function StartDrag(pframe)
@@ -175,19 +173,6 @@ local function UpdateSize(f)
 	cfg.frame.width = f:GetWidth() - 2
 	cfg.frame.height = f:GetHeight()
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

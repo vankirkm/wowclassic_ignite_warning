@@ -139,7 +139,6 @@ end
 
 function StartDrag(pframe)
     pframe = pframe:GetParent()
-    print("pframe")
     pframe:StartMoving()
 end
 
